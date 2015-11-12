@@ -162,5 +162,21 @@ class GreedyBustersAgent(BustersAgent):
         livingGhostPositionDistributions = \
             [beliefs for i, beliefs in enumerate(self.ghostBeliefs)
              if livingGhosts[i+1]]
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        
+        # Get the position of the most likely ghost
+        max_prob_pos = []
+        for ghost_dist in livingGhostPositionDistributions:
+            best_pos = max(ghost_dist, key = ghost_dist.get)
+            max_prob_pos.append((best_pos,ghost_dist[best_pos]))
+        best_pos = max(max_prob_pos, key=lambda x : x[1])[0]
+
+        # Find the best move
+        best_dist = float("inf")
+        best_move = None
+        for move in legal:
+            dist = self.distancer.getDistance(best_pos, Actions.getSuccessor(pacmanPosition, move))
+            if dist < best_dist or not best_move:
+                best_move = move 
+                best_dist = dist
+        
+        return best_move
