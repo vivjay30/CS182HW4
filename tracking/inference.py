@@ -313,15 +313,17 @@ class ParticleFilter(InferenceModule):
             FoundElt = 0
             for key in counted:
                 distance = util.manhattanDistance(key, pacmanPosition)
+                # Basically the weight to sample at from at different locations is
+                # the number of particles at that location * P(noisydist | true dist)
                 weights[key] = counted[key] * emissionModel[distance]
                 if weights[key] > 0:
                     FoundElt = 1
 
             weights.normalize()
             
-            # IF we didn't get all zeroes
+            # If we didn't get all zeroes
             if FoundElt:                
-                # Resample
+                # Forward sample, only consider emission
                 self.particles = []
                 for i in range(self.numParticles):
                     self.particles.append(util.sample(weights))
