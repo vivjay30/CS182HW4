@@ -19,6 +19,11 @@ from keyboardAgents import KeyboardAgent
 import inference
 import busters
 
+
+
+## PARTNERS: Saroj Kandel and Vivek Jayaram ##
+
+
 class NullGraphics:
     "Placeholder for graphics"
     def initialize(self, state, isBlue = False):

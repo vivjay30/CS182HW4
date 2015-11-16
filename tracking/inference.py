@@ -19,6 +19,10 @@ import busters
 import game
 from collections import Counter
 
+
+## Partners: Saroj Kandel and Vivek Jayaram ##
+
+
 class InferenceModule:
     """
     An inference module tracks a belief distribution over a ghost's location.
